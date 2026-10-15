@@ -1,0 +1,24 @@
+{
+  "name": "microcompose",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "test": "bun test tests/unit.test.ts tests/integration.test.ts",
+    "pretest:integration": "bun build src/index.ts --outdir build-test --target node --external testcontainers --external zod",
+    "test:integration": "MICROCOMPOSE_INTEGRATION=1 node ./node_modules/tsx/dist/cli.mjs --test tests/integration.node.test.ts",
+    "check": "biome check --write && tsc --noEmit"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.15",
+    "@types/bun": "latest",
+    "@types/node": "^26.6.5",
+    "tsx": "^4.23.15"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "testcontainers": "^12",
+    "zod": "^3"
+  }
+}
