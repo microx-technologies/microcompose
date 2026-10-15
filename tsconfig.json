@@ -5,7 +5,7 @@
     "module": "esnext",
     "moduleDetection": "force",
     "noEmit": true,
-    "types": ["bun"],
+    "types": ["node"],
 
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -20,5 +20,5 @@
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true
   },
-  "include": ["src", "tests", "tsup.config.ts"]
+  "include": ["src", "tests", "tsup.config.ts", "vitest.config.ts"]
 }

@@ -1,4 +1,4 @@
-import { describe, expect, test } from "bun:test";
+import { assert, describe, expect, test } from "vitest";
 import {
   AmbiguousPlaceholderError,
   DuplicatePortError,
@@ -60,7 +60,7 @@ describe("declaration validation", () => {
           },
         },
       });
-      expect.unreachable();
+      assert.fail("expected throw");
     } catch (err) {
       expect(err).toBeInstanceOf(DuplicatePortError);
       expect((err as DuplicatePortError).service).toBe("pg");
@@ -82,7 +82,7 @@ describe("declaration validation", () => {
           services: { a: { image: "x" } },
           defaultRange: range as [number, number],
         });
-        expect.unreachable();
+        assert.fail("expected throw");
       } catch (err) {
         expect(err).toBeInstanceOf(InvalidRangeError);
         expect((err as InvalidRangeError).range).toEqual(range);
@@ -93,13 +93,13 @@ describe("declaration validation", () => {
   test("empty name/image and bad container port throw InvalidServiceDeclError", () => {
     try {
       defineStack({ services: { "": { image: "x" } } });
-      expect.unreachable();
+      assert.fail("expected throw");
     } catch (err) {
       expect(err).toBeInstanceOf(InvalidServiceDeclError);
     }
     try {
       defineStack({ services: { a: { image: "" } } });
-      expect.unreachable();
+      assert.fail("expected throw");
     } catch (err) {
       expect(err).toBeInstanceOf(InvalidServiceDeclError);
       expect((err as InvalidServiceDeclError).reason).toBe(
@@ -110,7 +110,7 @@ describe("declaration validation", () => {
       defineStack({
         services: { a: { image: "x", ports: [{ container: 0 }] } },
       });
-      expect.unreachable();
+      assert.fail("expected throw");
     } catch (err) {
       expect(err).toBeInstanceOf(InvalidServiceDeclError);
       expect((err as InvalidServiceDeclError).service).toBe("a");
@@ -184,7 +184,7 @@ describe("template resolver", () => {
   test("ambiguous shorthands throw with candidates", () => {
     try {
       resolveTemplates({ A: "{{host}}" }, two);
-      expect.unreachable();
+      assert.fail("expected throw");
     } catch (err) {
       expect(err).toBeInstanceOf(AmbiguousPlaceholderError);
       expect((err as AmbiguousPlaceholderError).candidates).toEqual([
@@ -198,7 +198,7 @@ describe("template resolver", () => {
     });
     try {
       resolveTemplates({ A: "{{port:5432}}" }, both5432);
-      expect.unreachable();
+      assert.fail("expected throw");
     } catch (err) {
       expect(err).toBeInstanceOf(AmbiguousPlaceholderError);
       expect((err as AmbiguousPlaceholderError).placeholder).toBe(
@@ -211,7 +211,7 @@ describe("template resolver", () => {
   test("shorthand zero-match is ambiguous with empty candidates", () => {
     try {
       resolveTemplates({ A: "{{port:9999}}" }, two);
-      expect.unreachable();
+      assert.fail("expected throw");
     } catch (err) {
       expect(err).toBeInstanceOf(AmbiguousPlaceholderError);
       expect((err as AmbiguousPlaceholderError).candidates).toEqual([]);
@@ -221,7 +221,7 @@ describe("template resolver", () => {
   test("unknown service and port errors carry fields", () => {
     try {
       resolveTemplates({ A: "{{host:nope}}" }, two);
-      expect.unreachable();
+      assert.fail("expected throw");
     } catch (err) {
       expect(err).toBeInstanceOf(UnknownServiceError);
       expect((err as UnknownServiceError).placeholder).toBe("{{host:nope}}");
@@ -232,7 +232,7 @@ describe("template resolver", () => {
     }
     try {
       resolveTemplates({ A: "{{port:pg:9999}}" }, two);
-      expect.unreachable();
+      assert.fail("expected throw");
     } catch (err) {
       expect(err).toBeInstanceOf(UnknownPortError);
       expect((err as UnknownPortError).service).toBe("pg");
@@ -256,7 +256,7 @@ describe("template resolver", () => {
     ]) {
       try {
         resolveTemplates({ K: tpl }, two);
-        expect.unreachable(`expected malformed: ${tpl}`);
+        assert.fail(`expected malformed: ${tpl}`);
       } catch (err) {
         expect(err).toBeInstanceOf(MalformedTemplateError);
         expect((err as MalformedTemplateError).key).toBe("K");
@@ -291,7 +291,7 @@ describe("up()/down() guards and accessors without Docker", () => {
     const before = { ...process.env };
     try {
       await stack.up();
-      expect.unreachable();
+      assert.fail("expected throw");
     } catch (err) {
       expect(err).toBeInstanceOf(MissingPortRangeError);
     }
@@ -312,7 +312,7 @@ describe("up()/down() guards and accessors without Docker", () => {
     });
     try {
       await stack.up({ defaultRange: [3, 3] });
-      expect.unreachable();
+      assert.fail("expected throw");
     } catch (err) {
       expect(err).toBeInstanceOf(NoFreePortInRangeError);
       expect(
@@ -324,13 +324,13 @@ describe("up()/down() guards and accessors without Docker", () => {
     const stack = defineStack({ services: { ghost: { image: "x" } } });
     try {
       stack.hostPort("ghost", 1234);
-      expect.unreachable();
+      assert.fail("expected throw");
     } catch (err) {
       expect(err).toBeInstanceOf(StackNotUpError);
     }
     try {
       stack.hostPort("nope", 1);
-      expect.unreachable();
+      assert.fail("expected throw");
     } catch (err) {
       expect(err).toBeInstanceOf(StackNotUpError);
     }
