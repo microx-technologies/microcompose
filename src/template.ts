@@ -3,7 +3,7 @@ import {
   MalformedTemplateError,
   UnknownPortError,
   UnknownServiceError,
-} from "@/src/errors.ts";
+} from "@/errors.ts";
 
 export interface TemplateContext {
   serviceNames: string[];

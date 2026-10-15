@@ -1,10 +1,24 @@
 {
-  "name": "microcompose",
-  "module": "index.ts",
+  "name": "@microx-technologies/microcompose",
+  "version": "0.1.0",
+  "description": "Ephemeral-port test stacks on Testcontainers: declare services once, get collision-free host ports and autofilled connection-string env vars.",
   "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microx-technologies/microcompose.git"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
-    "test": "bun test tests/unit.test.ts tests/integration.test.ts",
-    "pretest:integration": "bun build src/index.ts --outdir build-test --target node --external testcontainers --external zod",
+    "build": "tsup",
+    "test": "bun test",
+    "pretest:integration": "bun run build",
     "test:integration": "MICROCOMPOSE_INTEGRATION=1 node ./node_modules/tsx/dist/cli.mjs --test tests/integration.node.test.ts",
     "check": "biome check --write && tsc --noEmit"
   },
@@ -12,13 +26,13 @@
     "@biomejs/biome": "^2.5.15",
     "@types/bun": "latest",
     "@types/node": "^26.6.5",
-    "tsx": "^4.23.15"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
+    "tsup": "^9.0.0",
+    "tsx": "^4.23.15",
+    "typescript": "5.9.3"
   },
   "dependencies": {
     "testcontainers": "^12",
     "zod": "^3"
-  }
+  },
+  "license": "AGPL-3.0"
 }

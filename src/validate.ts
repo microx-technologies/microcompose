@@ -4,11 +4,11 @@ import {
   DuplicatePortError,
   InvalidRangeError,
   InvalidServiceDeclError,
-} from "@/src/errors.ts";
+} from "@/errors.ts";
 
 export { InvalidServiceDeclError };
 
-import type { PortRange, StackDecl } from "@/src/types.ts";
+import type { PortRange, StackDecl } from "@/types.ts";
 
 export const MIN_PORT = 1;
 export const MAX_PORT = 65535;

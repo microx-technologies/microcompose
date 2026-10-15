@@ -9,7 +9,7 @@ import {
   MissingPortRangeError,
   NoFreePortInRangeError,
   type StackHandle,
-} from "@/src/index.ts";
+} from "@/index.ts";
 
 const INTEGRATION = process.env.MICROCOMPOSE_INTEGRATION === "1";
 
@@ -241,7 +241,7 @@ describe("microcompose integration", { skip: !INTEGRATION }, () => {
     timeout: 180_000,
   }, async (t: TestContext) => {
     const helperSrc = `
-      import { defineStack } from "../build-test/index.js";
+      import { defineStack } from "../dist/index.js";
       const stack = defineStack({
         defaultRange: [43500, 43599],
         services: { redis: { image: "redis:7", ports: [{ container: 6379 }] } },

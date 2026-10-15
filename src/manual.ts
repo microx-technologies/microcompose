@@ -1,4 +1,4 @@
-import type { PortRange, StackHandle } from "@/src/types.ts";
+import type { PortRange, StackHandle } from "@/types.ts";
 
 export interface RunManualOptions {
   defaultRange?: PortRange;
@@ -22,8 +22,7 @@ export async function runManual(
     process.stderr.write(`${String(err)}\n`);
     try {
       await stack.down();
-    } catch {
-    }
+    } catch {}
     process.exitCode = 1;
     return;
   }

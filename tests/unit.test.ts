@@ -14,7 +14,7 @@ import {
   StackNotUpError,
   UnknownPortError,
   UnknownServiceError,
-} from "@/src/index.ts";
+} from "@/index.ts";
 
 function ctx(
   services: Record<string, { host: string; ports: Record<number, number> }>,

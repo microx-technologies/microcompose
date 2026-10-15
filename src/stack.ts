@@ -28,22 +28,22 @@ import {
   StackNotUpError,
   UnknownPortError,
   UnknownServiceError,
-} from "@/src/errors.ts";
-import { resolveTemplates, type TemplateContext } from "@/src/template.ts";
+} from "@/errors.ts";
+import { resolveTemplates, type TemplateContext } from "@/template.ts";
 import type {
   PortRange,
   ServiceMapping,
   StackDecl,
   StackHandle,
   UpOptions,
-} from "@/src/types.ts";
+} from "@/types.ts";
 import {
   assertValidRange,
   InvalidServiceDeclError,
   type NormalizedServiceDecl,
   type NormalizedStackDecl,
   normalizeStackDecl,
-} from "@/src/validate.ts";
+} from "@/validate.ts";
 
 export type { ServiceMapping, StackDecl, StackHandle, UpOptions };
 

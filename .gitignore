@@ -139,6 +139,3 @@ dist
 
 # Nix
 .direnv
-
-# Other
-build-test/
