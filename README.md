@@ -15,21 +15,20 @@ This package is installed from GitHub, not a registry:
 
 ```sh
 # bun
-bun add github:<owner>/<repo>
+bun add github:microx-technologies/microcompose
 
 # pnpm
-pnpm add github:<owner>/<repo>
+pnpm add github:microx-technologies/microcompose
 ```
 
-Replace `<owner>/<repo>` with this repo's path. Pin a ref for
-reproducible installs:
+Pin a ref for reproducible installs:
 
 ```sh
 # bun
-bun add github:<owner>/<repo>#v0.1.0
+bun add github:microx-technologies/microcompose#v0.1.0
 
 # pnpm
-pnpm add github:<owner>/<repo>#v0.1.0
+pnpm add github:microx-technologies/microcompose#v0.1.0
 ```
 
 Then import:
@@ -161,10 +160,10 @@ GitHub Release with the tarball attached). Consumers install a release with:
 
 ```sh
 # bun
-bun add github:<owner>/<repo>#v0.1.0
+bun add github:microx-technologies/microcompose#v0.1.0
 
 # pnpm
-pnpm add github:<owner>/<repo>#v0.1.0
+pnpm add github:microx-technologies/microcompose#v0.1.0
 ```
 
 ## License
