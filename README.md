@@ -11,17 +11,22 @@ Requires **Node >= 22** and a running **Docker** daemon (via
 
 ## Install
 
-This package is installed from GitHub, not a registry:
+This package is installed from GitHub release branches, not a registry.
+Each version branch contains only the compiled `dist/` — no source clone,
+no build step on your machine:
 
 ```sh
-# bun
-bun add github:microx-technologies/microcompose
+# bun (latest stable release)
+bun add github:microx-technologies/microcompose#latest
 
 # pnpm
-pnpm add github:microx-technologies/microcompose
+pnpm add github:microx-technologies/microcompose#latest
+
+# npm
+npm install github:microx-technologies/microcompose#latest
 ```
 
-Pin a ref for reproducible installs:
+Pin a version for reproducible installs:
 
 ```sh
 # bun
@@ -29,6 +34,9 @@ bun add github:microx-technologies/microcompose#v0.1.0
 
 # pnpm
 pnpm add github:microx-technologies/microcompose#v0.1.0
+
+# npm
+npm install github:microx-technologies/microcompose#v0.1.0
 ```
 
 Then import:
@@ -138,25 +146,30 @@ pnpm run check # `biome check` + `tsc --noEmit`
 
 ## Releases
 
-CI verifies every push (rebuild, stale-`dist/` check, `check`, unit tests).
-To cut a release: bump `version` in `package.json`, rebuild, commit
-(including `dist/`), then push a matching semver tag:
-
-```sh
-# bun
-bun run build
-
-# pnpm
-pnpm run build
-```
+CI verifies every push (build, `check`, unit tests, Docker integration).
+To cut a release: bump `version` in `package.json`, then push a matching
+semver tag (`dist/` is gitignored and never committed):
 
 ```sh
 git tag v0.1.0   # MUST equal package.json version
 git push --follow-tags
 ```
 
-The tag triggers the release workflow (build → verify → pack →
-GitHub Release with the tarball attached). Consumers install a release with:
+The tag triggers the release workflow (verify → check → test → build →
+push compiled branch → GitHub Release). The workflow publishes a branch
+named after the tag containing only `dist/`, `package.json`, `README.md`,
+and `LICENSE`; stable tags also move the floating `latest` branch.
+Consumers install a release with:
+
+```sh
+# bun
+bun add github:microx-technologies/microcompose#latest
+
+# pnpm
+pnpm add github:microx-technologies/microcompose#latest
+```
+
+Or pin a specific version:
 
 ```sh
 # bun
