@@ -1,0 +1,37 @@
+{
+  "name": "@microx-technologies/microcompose",
+  "version": "0.1.0",
+  "description": "Ephemeral-port test stacks on Testcontainers: declare services once, get collision-free host ports and autofilled connection-string env vars.",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microx-technologies/microcompose.git"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "prepack": "bun run build",
+    "test": "vitest run",
+    "test:integration": "MICROCOMPOSE_INTEGRATION=1 vitest run",
+    "check": "biome check --write && tsc --noEmit"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.15",
+    "@types/node": "^26.6.5",
+    "tsup": "^9.0.0",
+    "typescript": "5.9.3",
+    "vitest": "^5.0.5"
+  },
+  "dependencies": {
+    "testcontainers": "^12",
+    "zod": "^3"
+  },
+  "license": "AGPL-3.0"
+}
